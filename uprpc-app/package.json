@@ -13,6 +13,8 @@
 				"package-win": "tsc && electron-builder build --win --x64",
 				"prepackage": "cd ../uprpc-web/ && yarn build",
 				"prepackage-all": "cd ../uprpc-web/ && yarn build",
+        "prepackage-linux": "cd ../uprpc-web/ && yarn build",
+        "prepackage-win": "cd ../uprpc-web/ && yarn build",
 				"start": "npm run dev"
 		},
 		"devDependencies": {
