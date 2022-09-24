@@ -4,70 +4,68 @@ name: release-ci
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    tags:
-      - 'v*.*.*'
+    # Triggers the workflow on push or pull request events but only for the "main" branch
+    push:
+        tags:
+            - "v*.*.*"
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  release:
-    runs-on: ${{ matrix.os }}
+    # This workflow contains a single job called "build"
+    release:
+        runs-on: ${{ matrix.os }}
 
-    strategy:
-      matrix:
-        os: [macos-latest]
-    
-    # build and release electron app
-    steps: 
-      - name: Check out Git repository
-        uses: actions/checkout@v3
+        strategy:
+            matrix:
+                os: [macos-latest]
 
-      - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.13.1
-          cache: 'yarn'
-      
-      - name: Install yarn
-        run: npm install --global yarn
- 
-      - name: Install Dependencies
-        run: cd ./uprpc-app && yarn
+        # build and release electron app
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v3
 
-      - name: Install Dependencies
-        run: cd ./uprpc-web && yarn
-        
-        
-      - name: Build Electron App
-        run: cd ./uprpc-app && yarn run package
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+            - name: Install Node.js, NPM and Yarn
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 16.13.1
+                  cache: "yarn"
 
-      - name: Cleanup Artifacts for Windows
-        if: matrix.os == 'windows-latest'
-        run: |
-          npx rimraf "dist/!(*.exe)"
+            - name: Install yarn
+              run: npm install --global yarn rimraf
 
-      - name: Cleanup Artifacts for MacOS
-        if: matrix.os == 'macos-latest'
-        run: |
-          npx rimraf "dist/!(*.dmg)"
+            - name: Install Dependencies
+              run: cd ./uprpc-app && yarn
 
-      - name: upload artifacts
-        uses: actions/upload-artifact@v3.0.0
-        with:
-          name: ${{ matrix.os }}
-          path: uprpc-app/release/*
+            - name: Install Dependencies
+              run: cd ./uprpc-web && yarn
 
-      - name: release
-        uses: softprops/action-gh-release@v0.1.14
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: "uprpc-app/release/**"
-          github_token: ${{ secrets.github_token }}
+            - name: Build Electron App
+              run: cd ./uprpc-app && yarn run package
+              env:
+                  GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
+            - name: Cleanup Artifacts for Windows
+              if: matrix.os == 'windows-latest'
+              run: |
+                  npx rimraf "uprpc-app/release/!(*.exe)"
+
+            - name: Cleanup Artifacts for MacOS
+              if: matrix.os == 'macos-latest'
+              run: |
+                  npx rimraf "uprpc-app/release/!(*.dmg)"
+
+            - name: upload artifacts
+              uses: actions/upload-artifact@v3.0.0
+              with:
+                  name: ${{ matrix.os }}
+                  path: uprpc-app/release/
+
+            - name: release
+              uses: softprops/action-gh-release@v0.1.14
+              if: startsWith(github.ref, 'refs/tags/')
+              with:
+                  files: "uprpc-app/release/**"
+                  token: ${{ secrets.github_token }}
