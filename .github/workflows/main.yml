@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest, windows-latest]
+        os: [macos-latest]
     
     # build and release electron app
     steps: 
@@ -42,7 +42,7 @@ jobs:
         
         
       - name: Build Electron App
-        run: cd ./uprpc-app && yarn run package-all
+        run: cd ./uprpc-app && yarn run package
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
