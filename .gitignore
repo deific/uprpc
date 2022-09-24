@@ -9,3 +9,9 @@ uprpc-lib/node_modules
 uprpc-mock/.DS_Store
 .vscode/launch.json
 uprpc-app/release/
+uprpc-app/static/314.async.js
+uprpc-app/static/index.html
+uprpc-app/static/p__index.async.js
+uprpc-app/static/p__index.chunk.css
+uprpc-app/static/umi.css
+uprpc-app/static/umi.js
