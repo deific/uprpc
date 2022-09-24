@@ -68,4 +68,4 @@ jobs:
               if: startsWith(github.ref, 'refs/tags/')
               with:
                   files: "uprpc-app/release/**"
-                  token: ${{ secrets.github_token }}
+                  token: ${{ secrets.ACCESS_TOKEN }}
