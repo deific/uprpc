@@ -56,6 +56,8 @@
 						]
 				},
 				"dmg": {
+            "background": "assets/appdmg.png",
+            "icon": "assets/icon.icns",
 						"iconSize": 100,
 						"contents": [
 								{
@@ -82,6 +84,7 @@
 								"zip"
 						],
 						"verifyUpdateCodeSignature": false,
+						"icon": "assest/icon.ico",
 						"artifactName": "${productName}-setup-${version}.${ext}"
 				},
 				"nsis": {
