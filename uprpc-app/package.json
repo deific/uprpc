@@ -7,7 +7,7 @@
 		"license": "MIT",
 		"scripts": {
 				"dev": "tsc -b && electron dist/main.js",
-				"package": "tsc && electron-builder",
+				"package": "tsc && electron-builder --x64 --arm64",
 				"package-all": "tsc && electron-builder build -mwl",
 				"package-linux": "tsc && electron-builder build --linux",
 				"package-win": "tsc && electron-builder build --win --x64",
@@ -83,7 +83,7 @@
 						],
 						"verifyUpdateCodeSignature": false,
 						"icon": "assest/icon.ico",
-						"artifactName": "${productName}-Web-Setup-${version}.${ext}"
+						"artifactName": "${productName}-setup-${version}.${ext}"
 				},
 				"nsis": {
 						"allowToChangeInstallationDirectory": true,
