@@ -82,7 +82,6 @@
 								"zip"
 						],
 						"verifyUpdateCodeSignature": false,
-						"icon": "assest/icon.ico",
 						"artifactName": "${productName}-setup-${version}.${ext}"
 				},
 				"nsis": {
