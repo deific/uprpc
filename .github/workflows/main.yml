@@ -50,7 +50,7 @@ jobs:
             - name: Cleanup Artifacts for Windows
               if: matrix.os == 'windows-latest'
               run: |
-                  npx rimraf "uprpc-app/release/!(*.exe|*.zip|*.msi|*.nsis)"
+                  npx rimraf "uprpc-app/release/!(*.exe,*.zip,*.msi,*.nsis)"
 
             - name: Cleanup Artifacts for MacOS
               if: matrix.os == 'macos-latest'
