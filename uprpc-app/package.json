@@ -7,7 +7,7 @@
 		"license": "MIT",
 		"scripts": {
 				"dev": "tsc -b && electron dist/main.js",
-				"package": "tsc && electron-builder --x64 --arm64",
+				"package": "tsc && electron-builder -p always",
 				"package-all": "tsc && electron-builder build -mwl",
 				"package-linux": "tsc && electron-builder build --linux",
 				"package-win": "tsc && electron-builder build --win --x64",
